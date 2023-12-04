@@ -1,5 +1,6 @@
 import "@/styles/globals.css"
 import { Metadata } from "next"
+import { headers } from "next/headers"
 
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
@@ -30,6 +31,8 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
+  const nonce = headers().get("x-nonce")
+
   return (
     <>
       <html lang="en" suppressHydrationWarning>
@@ -43,7 +46,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
-              <div className="flex-1">{children}</div>
+              <div className="flex-1 flex items-center justify-center">
+                <h1 className="text-xl font-bold text-center">
+                  Nonce: {nonce}
+                </h1>
+              </div>
             </div>
             <TailwindIndicator />
           </ThemeProvider>
