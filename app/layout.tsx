@@ -1,6 +1,7 @@
 import "@/styles/globals.css"
 import { Metadata } from "next"
 import { headers } from "next/headers"
+import Script from "next/script"
 
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
@@ -52,6 +53,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 </h1>
               </div>
             </div>
+            <Script
+              nonce={nonce || ""}
+              strategy="lazyOnload"
+              data-domain="localhost"
+              src="https://code.jquery.com/jquery-3.7.1.js"
+              integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+              crossOrigin="anonymous"
+            />
             <TailwindIndicator />
           </ThemeProvider>
         </body>
